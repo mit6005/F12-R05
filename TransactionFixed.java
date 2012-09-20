@@ -1,10 +1,15 @@
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
+
 //Taken from lecture notes.
-public class Transaction {
-	
+public class TransactionFixed {
+
 	private final int amount;
 	private final Calendar date;
-	
-	public Transaction(int amount, Calendar date) {
+
+	public TransactionFixed(int amount, Calendar date) {
 	        this.amount = amount;
 	        this.date = (Calendar)date.clone();
 	    }
@@ -14,21 +19,21 @@ public class Transaction {
 	 public Calendar getDate() {
 	        return (Calendar)date.clone();
 	    }
-	
+
 	/** @return a transaction of same amount as t, one month later */
-	public static Transaction makeNextPayment(Transaction t) {
-	    Calendar d = t.getDate(); 
+	public static TransactionFixed makeNextPayment(TransactionFixed t) {
+	    Calendar d = t.getDate();
 	    d.add(Calendar.MONTH, 1);
-	    return new Transaction (t.getAmount(), d);
+	    return new TransactionFixed (t.getAmount(), d);
 	}
 	/** @return a list of 12 monthly payments of identical amounts */
-	public static List<Transaction> makeYearOfPayments (int amount) {
-	    List<Transaction> list = new ArrayList<Transaction> (); 
-	    Calendar date = new GregorianCalendar (); 
+	public static List<TransactionFixed> makeYearOfPayments (int amount) {
+	    List<TransactionFixed> list = new ArrayList<TransactionFixed> ();
+	    Calendar date = new GregorianCalendar ();
 	    for (int i=0; i < 12; i++) {
-	        list.add (new Transaction (amount, date));
+	        list.add (new TransactionFixed (amount, date));
 	        date.add (Calendar.MONTH, 1);
-	    } 
+	    }
 	    return list;
 	}
 }
